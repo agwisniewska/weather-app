@@ -87,7 +87,7 @@ gulp.task("scripts", ["views"], function () {
     .transform(ngAnnotate)
     .bundle()
     .pipe(source("app.min.js"))
-    .pipe(streamify(uglify()))
+    // .pipe(streamify(uglify()))
     .pipe(gulp.dest("./build"));
 });
 
