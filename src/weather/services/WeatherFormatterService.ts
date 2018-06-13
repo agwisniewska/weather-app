@@ -1,10 +1,21 @@
 import { WeatherForecast } from "../model/WeatherForecast";
 import { IPromise } from "angular";
-import { groupBy, values } from "lodash";
+import {
+  map,
+  forOwn,
+  maxBy,
+  keys,
+  groupBy,
+  meanBy,
+  chain,
+  last,
+  countBy,
+  sortBy
+} from "lodash";
 import * as moment from "moment";
-import { WeatherFrontendModel } from "../model/WeatherFrontendModel";
 import { DailyWeather } from "../model/DailyWeather";
 import { Measurement } from "../model/Measurement";
+import { WeatherPanelModel } from "../model/WeatherPanelModel";
 
 export class WeatherFormatterService {
   constructor() {
@@ -13,30 +24,72 @@ export class WeatherFormatterService {
 
   public mapWeatherForecastToModel = (
     weatherForecast: WeatherForecast
-  ): WeatherFrontendModel => {
-    const days: DailyWeather[] = this.groupMeasurementsByDate(
-      weatherForecast.measurementsList
+  ): WeatherPanelModel => {
+    const grouped: {
+      [key: string]: Measurement[];
+    } = this.groupMeasurementsByDate(weatherForecast.measurementsList);
+    const days: DailyWeather[] = this.mapMeasurementsToDailyWeatherList(
+      grouped
     );
-    return new WeatherFrontendModel(days);
+    return new WeatherPanelModel(days);
   };
 
-  private groupMeasurementsByDate = (list: Measurement[]): DailyWeather[] => {
+  public mapMeasurementsToDailyWeatherList = (groupedMeasurements: {
+    [key: string]: Measurement[];
+  }): DailyWeather[] => {
     const days: DailyWeather[] = [];
-    const grouped: any = values(
-      groupBy(list, (element: Measurement) =>
-        moment.unix(element.date).format("DD/MM/YYYY")
-      )
-    );
-    grouped.map((element: Measurement[]) =>
-      days.push(this.getDailyWeather(element))
-    );
+    forOwn(groupedMeasurements, (value: Measurement[], date: string) => {
+      const measurements: Measurement[] = groupedMeasurements[date];
+      const minTemp: number = this.countMinTemperature(measurements);
+      const maxTemp: number = this.countMaxTemperature(measurements);
+      const meanTemp: number = this.countMeanTemperature(measurements);
+      const modeTemp: number = this.countModeTemperature(measurements);
+      const dailyWeather: DailyWeather = new DailyWeather(
+        date,
+        minTemp,
+        maxTemp,
+        meanTemp,
+        modeTemp,
+        measurements[0].description,
+        measurements[0].weatherIcon
+      );
+      days.push(dailyWeather);
+    });
     return days;
   };
 
-  private getDailyWeather = (element: Measurement[]): DailyWeather => {};
+  public groupMeasurementsByDate = (
+    list: Measurement[]
+  ): { [key: string]: Measurement[] } => {
+    return groupBy(list, (element: Measurement) => element.date);
+  };
 
-  //   private countMinTemperature = (): void => {};
-  //   private countMaxTemperature = (): void => {};
-  //   private countMeanTemperature = (): void => {};
-  //   private countModeTemperature = (): void => {};
+  public getTemperatures = (measurements: Measurement[]): number[] => {
+    return measurements.map(
+      (measurement: Measurement) => measurement.temperature
+    );
+  };
+  public countMinTemperature = (measurements: Measurement[]): number => {
+    return Math.min(...this.getTemperatures(measurements));
+  };
+  public countMaxTemperature = (measurements: Measurement[]): number => {
+    return Math.max(...this.getTemperatures(measurements));
+  };
+
+  private countMeanTemperature = (measurements: Measurement[]): number => {
+    return meanBy(
+      measurements,
+      (measurement: Measurement) => measurement.temperature
+    );
+  };
+  private countModeTemperature = (measurements: Measurement[]): number => {
+    let countArray: { [key: number]: number } = countBy(
+      map(measurements, (measurement: Measurement) => measurement.temperature)
+    );
+    const maxValue: string = maxBy(
+      keys(countArray),
+      (key: any) => countArray[key]
+    );
+    return parseInt(maxValue, 0);
+  };
 }

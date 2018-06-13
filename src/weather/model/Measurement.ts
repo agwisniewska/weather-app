@@ -1,11 +1,11 @@
 export class Measurement {
-  public date: any;
+  public date: string;
   public temperature: number;
   public description: string;
   public weatherIcon: string;
 
   constructor(
-    date: any,
+    date: string,
     temperature: number,
     description: string,
     weatherIcon: string

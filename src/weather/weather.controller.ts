@@ -2,7 +2,7 @@ import { WeatherFormatterService } from './services/WeatherFormatterService';
 import { WeatherForecast } from './model/WeatherForecast';
 import { IPromise } from 'angular';
 import { WeatherService } from './services/WeatherService';
-import { WeatherFrontendModel } from './model/WeatherFrontendModel';
+import { WeatherPanelModel } from './model/WeatherPanelModel';
 export class WeatherController {
   public weatherModel: any;
   private weatherFormatterService: WeatherFormatterService;
@@ -18,7 +18,7 @@ export class WeatherController {
     this.getWeather();
   }
 
-  public getWeather = (): IPromise<WeatherFrontendModel> => {
+  public getWeather = (): IPromise<WeatherPanelModel> => {
     return this.weatherService
       .getWeatherForecast()
       .then(

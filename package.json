@@ -22,6 +22,7 @@
     "babel-preset-es2015": "^6.1.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.109",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",

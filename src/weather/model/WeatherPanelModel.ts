@@ -1,6 +1,6 @@
-import { DailyWeather } from './DailyWeather';
+import { DailyWeather } from "./DailyWeather";
 
-export class WeatherFrontendModel {
+export class WeatherPanelModel {
   public days: DailyWeather[];
 
   constructor(days: DailyWeather[]) {
