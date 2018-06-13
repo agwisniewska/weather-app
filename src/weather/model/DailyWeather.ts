@@ -1,5 +1,5 @@
 export class DailyWeather {
-  public date: any;
+  public date: string;
   public minTemperature: number;
   public maxTemperature: number;
   public meanTemperature: number;
@@ -8,7 +8,7 @@ export class DailyWeather {
   public description: string;
 
   constructor(
-    date: any,
+    date: string,
     minTemperature: number,
     maxTemperature: number,
     meanTemperature: number,

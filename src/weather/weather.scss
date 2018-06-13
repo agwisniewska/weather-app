@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import "../weather/day/daily_weather";
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #F0F0F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .weather-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+    box-shadow: 5px 2px 22px 0px rgba(0, 0, 0, 0.68);
+    border-radius: 5px;
+    height: auto;
+    min-height: 300px;
+    .week-weather {
+      display: flex;
+      height: 300px;
+      margin: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

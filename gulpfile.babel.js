@@ -42,19 +42,6 @@ gulp.task("html", function () {
   gulp.src("./src/index.html").pipe(gulp.dest("./build"));
 });
 
-// gulp.task("views", function () {
-//   return gulp
-//     .src("./src/**/**/*.html")
-//     .pipe(
-//       templateCache({
-//         standalone: true
-//       })
-//     )
-//     .on('error', interceptErrors)
-//     .pipe(rename("weather.templates.js"))
-//     .pipe(gulp.dest("./src/weather"));
-// });
-
 gulp.task('views', function () {
   return gulp.src('./src/**/**/*.html')
     .pipe(templateCache({
@@ -63,13 +50,6 @@ gulp.task('views', function () {
     .pipe(rename("weather.templates.js"))
     .pipe(gulp.dest('./src/'));
 });
-
-// gulp.task("views", function () {
-//   return gulp
-//     .src("./src/**/**/*.html")
-//     .on('error', interceptErrors)
-//     .pipe(gulp.dest("./build/views"));
-// });
 
 gulp.task("clean", function () {
   return del(["./build/*", "./src/weather/weather.templates.js"]);
@@ -95,6 +75,7 @@ gulp.task("sass", function () {
   return gulp
     .src("./src/weather/weather.scss")
     .pipe(sass().on("error", sass.logError))
+    .pipe(rename('app.css'))
     .pipe(gulp.dest("./build"))
     .pipe(
       browserSync.reload({
@@ -104,12 +85,16 @@ gulp.task("sass", function () {
 });
 
 gulp.task(
-  "watch", ["scripts:watch", "templates:watch", "html:watch"],
+  "watch", ["scripts:watch", "templates:watch", "html:watch", "sass:watch"],
   function () {}
 );
 
 gulp.task("html:watch", function () {
   gulp.watch("./src/*.html", ["html"]).on("change", browserSync.reload);
+});
+
+gulp.task("sass:watch", function () {
+  gulp.watch("./src/weather/weather.scss", ["sass"]).on("change", browserSync.reload);
 });
 gulp.task("templates:watch", function () {
   gulp.watch("./src/weather/**/*.html", ["views"]);

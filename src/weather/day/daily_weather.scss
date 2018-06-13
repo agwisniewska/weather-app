@@ -1,0 +1,31 @@
+.daily-weather {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 2px 31px -21px black;
+  &.selected {}
+  .description {
+    font-size: 10px;
+  }
+  .icon {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .temperatures {
+    .min-temp {
+      color: lightgray;
+      font-size: 15px;
+    }
+    .max-temp {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .celsius {
+      font-size: 12px;
+    }
+  }
+}

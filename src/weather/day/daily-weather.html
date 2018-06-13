@@ -1,2 +1,15 @@
-<details></details>
-<div> day </div>
+<div class="daily-weather" data-ng-class="{selected: daily.selected}" data-ng-click="daily.openDetails()">
+  <div class="date">{{daily.dailyWeather.date}}</div>
+  <img class="icon" src="http://openweathermap.org/img/w/{{daily.dailyWeather.icon}}.png"></img>
+  <div class="description">{{daily.dailyWeather.description}}</div>
+  <div class="temperatures">
+    <span class="max-temp">{{daily.dailyWeather.maxTemperature}}
+      <span class="celsius">
+        <sup>o</sup>C</span>
+    </span> /
+    <span class="min-temp">{{daily.dailyWeather.minTemperature}}
+      <span class="celsius">
+        <sup>o</sup>C</span>
+    </span>
+  </div>
+</div>

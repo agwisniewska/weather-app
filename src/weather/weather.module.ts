@@ -8,13 +8,11 @@ import { WeatherResponseMapper } from './services/WeatherResponseMapper';
 import { WeatherRequestService } from './services/WeatherRequestService';
 import { WeatherService } from './services/WeatherService';
 import { DailyWeatherComponent } from './day/daily-weather.component';
-import { DailyWeatherDetailsComponent } from './day/day_details/daily-weather-details.component';
 
 export const WeatherModule: any = module('app', ['templates', 'ngResource'])
   .service('WeatherFormatterService', WeatherFormatterService)
   .service('WeatherRequestService', WeatherRequestService)
   .service('WeatherResponseMapper', WeatherResponseMapper)
   .service('WeatherService', WeatherService)
-  .component('weather', new WeatherComponent())
   .component('day', new DailyWeatherComponent())
-  .component('details', new DailyWeatherDetailsComponent());
+  .component('weather', new WeatherComponent());

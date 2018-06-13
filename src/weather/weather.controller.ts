@@ -1,10 +1,10 @@
-import { WeatherFormatterService } from './services/WeatherFormatterService';
-import { WeatherForecast } from './model/WeatherForecast';
-import { IPromise } from 'angular';
-import { WeatherService } from './services/WeatherService';
-import { WeatherPanelModel } from './model/WeatherPanelModel';
+import { WeatherFormatterService } from "./services/WeatherFormatterService";
+import { WeatherForecast } from "./model/WeatherForecast";
+import { IPromise } from "angular";
+import { WeatherService } from "./services/WeatherService";
+import { WeatherPanelModel } from "./model/WeatherPanelModel";
 export class WeatherController {
-  public weatherModel: any;
+  public weatherModel: WeatherPanelModel;
   private weatherFormatterService: WeatherFormatterService;
   private weatherService: WeatherService;
   constructor(
@@ -16,7 +16,7 @@ export class WeatherController {
   }
   public $onInit = (): void => {
     this.getWeather();
-  }
+  };
 
   public getWeather = (): IPromise<WeatherPanelModel> => {
     return this.weatherService
@@ -27,5 +27,5 @@ export class WeatherController {
             weather
           ))
       );
-  }
+  };
 }
