@@ -1,12 +1,12 @@
-import { DayWeatherController } from './day-weather.controller';
+import { DailyWeatherController } from './daily-weather.controller';
 
-export class DayWeatherComponent implements ng.IComponentOptions {
+export class DailyWeatherComponent implements ng.IComponentOptions {
   public controller: ng.Injectable<ng.IControllerConstructor>;
   public controllerAs: string;
   public template: string;
 
   constructor() {
-    this.controller = DayWeatherController;
+    this.controller = DailyWeatherController;
     this.controllerAs = 'day';
     this.template = './day-weather.html';
   }
