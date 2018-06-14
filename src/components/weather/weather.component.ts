@@ -1,4 +1,4 @@
-import { WeatherController } from './weather.controller';
+import { WeatherController } from "./weather.controller";
 
 export class WeatherComponent implements ng.IComponentOptions {
   public controller: ng.Injectable<ng.IControllerConstructor>;
@@ -7,7 +7,7 @@ export class WeatherComponent implements ng.IComponentOptions {
 
   constructor() {
     this.controller = WeatherController;
-    this.controllerAs = 'weather';
-    this.templateUrl = 'weather/weather.html';
+    this.controllerAs = "weather";
+    this.templateUrl = "app/components/weather/weather.html";
   }
 }

@@ -1,5 +1,4 @@
-import { Measurement } from './Measurement';
-
+import { Measurement } from './measurement.model';
 export class WeatherForecast {
   public measurementsList: Measurement[];
 

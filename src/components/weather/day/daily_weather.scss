@@ -1,6 +1,6 @@
 $daily-weather-width: 150px;
 $daily-weather-height: auto;
-$daily-weather-padding: 30px 5px;
+$daily-weather-padding: 20px 5px;
 $daily-weather-box-shadow: 0px 2px 31px -21px black;
 $icon-size: 50px;
 $color-light-grey: #d3d3d3;
@@ -12,7 +12,9 @@ $color-light-grey: #d3d3d3;
   text-align: center;
   cursor: pointer;
   box-shadow: $daily-weather-box-shadow;
-  &.selected {}
+  div {
+    margin: 2px 0;
+  }
   .date {
     font-size: 14px;
   }
@@ -20,10 +22,8 @@ $color-light-grey: #d3d3d3;
     font-size: 10px;
   }
   .icon {
-    img {
-      width: $icon-size;
-      height: $icon-size;
-    }
+    width: $icon-size;
+    height: $icon-size;
   }
   .temperatures {
     .min-temp {
@@ -35,7 +35,10 @@ $color-light-grey: #d3d3d3;
       font-size: 18px;
     }
     .celsius {
-      font-size: 12px;
+      font-size: 8px;
     }
+  }
+  .calculations {
+    font-size: 8px;
   }
 }

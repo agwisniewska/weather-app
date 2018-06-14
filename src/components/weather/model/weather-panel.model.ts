@@ -1,4 +1,4 @@
-import { DailyWeather } from "./DailyWeather";
+import { DailyWeather } from './daily-weather.model';
 
 export class WeatherPanelModel {
   public days: DailyWeather[];

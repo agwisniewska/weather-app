@@ -1,4 +1,4 @@
-import { DailyWeatherController } from './daily-weather.controller';
+import { DailyWeatherController } from "./daily-weather.controller";
 
 export class DailyWeatherComponent implements ng.IComponentOptions {
   public controller: ng.Injectable<ng.IControllerConstructor>;
@@ -9,9 +9,9 @@ export class DailyWeatherComponent implements ng.IComponentOptions {
   constructor() {
     this.controller = DailyWeatherController;
     this.bindings = {
-      dailyWeather: '<'
+      dailyWeather: "<"
     };
-    this.controllerAs = 'daily';
-    this.templateUrl = 'weather/day/daily-weather.html';
+    this.controllerAs = "daily";
+    this.templateUrl = "app/components/weather/day/daily-weather.html";
   }
 }

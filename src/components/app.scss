@@ -1,0 +1,11 @@
+@import '../components/weather/weather.scss';
+$body-font-family:'Open Sans',
+sans-serif;
+$body-color: #F0F0F0;
+body {
+  font-family: $body-font-family;
+  background-color: $body-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

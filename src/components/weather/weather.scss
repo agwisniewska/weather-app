@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import "../weather/day/daily_weather";
+$weather-panel-background: #fff;
+$weather-panel-border-radius: 5px;
+$weather-panel-shadow: 5px 2px 22px 0px rgba(0,
+0,
+0,
+0.68);
+$weather-panel-min-height: 300px;
+$weather-panel-padding: 20px 0 0 0;
+$weather-panel-week-margin: 20px;
+$weather-panel-week-height: 200px;
+.weather-panel {
+  background-color: $weather-panel-background;
+  box-shadow: $weather-panel-shadow;
+  border-radius: $weather-panel-border-radius;
+  height: auto;
+  min-height: $weather-panel-min-height;
+  padding: $weather-panel-padding;
+  .title {
+    text-align: center;
+    font-size: 20px;
+  }
+  .week-weather {
+    display: flex;
+    height: $weather-panel-week-height;
+    margin: $weather-panel-week-margin;
+    align-items: center;
+    justify-content: center;
+  }
+}

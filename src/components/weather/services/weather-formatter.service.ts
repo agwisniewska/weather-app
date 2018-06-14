@@ -1,4 +1,3 @@
-import { WeatherForecast } from '../model/WeatherForecast';
 import { IPromise } from 'angular';
 import {
   map,
@@ -13,9 +12,10 @@ import {
   sortBy
 } from 'lodash';
 import * as moment from 'moment';
-import { DailyWeather } from '../model/DailyWeather';
-import { Measurement } from '../model/Measurement';
-import { WeatherPanelModel } from '../model/WeatherPanelModel';
+import { WeatherForecast } from '../model/weather-forecast.model';
+import { WeatherPanelModel } from '../model/weather-panel.model';
+import { Measurement } from '../model/measurement.model';
+import { DailyWeather } from '../model/daily-weather.model';
 
 export class WeatherFormatterService {
   constructor() {
@@ -77,10 +77,11 @@ export class WeatherFormatterService {
   }
 
   private countMeanTemperature = (measurements: Measurement[]): number => {
-    return meanBy(
+    const mean: number = meanBy(
       measurements,
       (measurement: Measurement) => measurement.temperature
     );
+    return parseFloat(mean.toFixed(2));
   }
   private countModeTemperature = (measurements: Measurement[]): number => {
     let countArray: { [key: number]: number } = countBy(

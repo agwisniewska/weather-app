@@ -18,18 +18,6 @@ import ts from 'gulp-typescript';
 browserSync.create();
 const tsProject = ts.createProject("tsconfig.json");
 
-let interceptErrors = function (error) {
-  let args = Array.prototype.slice.call(arguments);
-
-  notify.onError({
-    title: 'Compile Error',
-    message: '<%= error.message %>'
-  }).apply(this, args);
-
-  this.emit('end');
-};
-
-
 gulp.task("default", ["clean", "scripts", "sass", "html", "watch"], function () {
   browserSync.init(["./build/**/**.**"], {
     server: "./build",
@@ -43,21 +31,23 @@ gulp.task("html", function () {
 });
 
 gulp.task('views', function () {
-  return gulp.src('./src/**/**/*.html')
+  return gulp.src('./src/**/**/**/*.html')
     .pipe(templateCache({
+      module: 'templates',
       standalone: true,
+      root: 'app'
     }))
-    .pipe(rename("weather.templates.js"))
-    .pipe(gulp.dest('./src/'));
+    .pipe(rename("app.templates.js"))
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task("clean", function () {
-  return del(["./build/*", "./src/weather/weather.templates.js"]);
+  return del(["./build/*"]);
 });
 
 gulp.task("scripts", ["views"], function () {
   return browserify({
-      entries: "./src/weather/weather.module.ts",
+      entries: "./src/app.module.ts",
       debug: true
     })
     .plugin(tsify)
@@ -73,7 +63,7 @@ gulp.task("scripts", ["views"], function () {
 
 gulp.task("sass", function () {
   return gulp
-    .src("./src/weather/weather.scss")
+    .src("./src/components/app.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(rename('app.css'))
     .pipe(gulp.dest("./build"))
@@ -94,12 +84,12 @@ gulp.task("html:watch", function () {
 });
 
 gulp.task("sass:watch", function () {
-  gulp.watch("./src/weather/weather.scss", ["sass"]).on("change", browserSync.reload);
+  gulp.watch("./src/components/app.scss", ["sass"]).on("change", browserSync.reload);
 });
 gulp.task("templates:watch", function () {
-  gulp.watch("./src/weather/**/*.html", ["views"]);
+  gulp.watch("./src/components/weather/**/*.html", ["views"]);
 });
 
 gulp.task("scripts:watch", function () {
-  gulp.watch("./src/**/**/*.ts", ["scripts"]).on("change", browserSync.reload);
+  gulp.watch("./src/components/**/**/*.ts", ["scripts"]).on("change", browserSync.reload);
 });
