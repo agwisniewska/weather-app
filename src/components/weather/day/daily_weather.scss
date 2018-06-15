@@ -2,8 +2,9 @@ $daily-weather-width: 150px;
 $daily-weather-height: auto;
 $daily-weather-padding: 20px 5px;
 $daily-weather-box-shadow: 0px 2px 31px -21px black;
-$icon-size: 50px;
+$daily-weather-icon-size: 50px;
 $color-light-grey: #d3d3d3;
+
 .daily-weather {
   width: $daily-weather-width;
   height: $daily-weather-height;
@@ -22,8 +23,8 @@ $color-light-grey: #d3d3d3;
     font-size: 10px;
   }
   .icon {
-    width: $icon-size;
-    height: $icon-size;
+    width: $daily-weather-icon-size;
+    height: $daily-weather-icon-size;
   }
   .temperatures {
     .min-temp {
